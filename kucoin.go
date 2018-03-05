@@ -339,8 +339,6 @@ func (b *Kucoin) ListSpecificDealtOrders(symbol, side string, limit, page int) (
 // All parameters are optional. Timestamp must be in milliseconds from Unix epoch.
 func (b *Kucoin) ListMergedDealtOrders(symbol, side string, limit, page int, since, before int64) (mergedDealtOrders MergedDealtOrder, err error) {
 	payload := map[string]string{}
-	payload["symbol"] = symbol
-	payload["type"] = side
 	if len(symbol) > 1 {
 		payload["symbol"] = symbol
 	}
