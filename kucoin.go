@@ -345,7 +345,7 @@ func (b *Kucoin) ListMergedDealtOrders(symbol, side string, limit, page int, sin
 	if len(side) > 1 {
 		payload["type"] = side
 	}
-	if (limit == 0 || limit > 100) && len(symbol) > 1 {
+	if (limit == 0 || limit > 100) && len(symbol) == 0 {
 		payload["limit"] = fmt.Sprintf("%v", 100)
 	} else if (limit == 0 || limit > 20) && len(symbol) > 1 {
 		payload["limit"] = fmt.Sprintf("%v", 20)
