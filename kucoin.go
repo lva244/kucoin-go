@@ -261,14 +261,18 @@ func (b *Kucoin) CreateOrder(symbol, side string, price, amount float64) (orderO
 // Example:
 // - Coin = KCS
 // - Side = DEPOSIT | WITHDRAW
-// - Status = FINISHED | CANCEL | PENDING
+// - Status = SUCCESS | CANCEL | PENDING
 func (b *Kucoin) AccountHistory(coin, side, status string, limit, page int) (accountHistory AccountHistory, err error) {
 	if len(coin) < 1 || len(side) < 1 || len(status) < 1 {
 		return accountHistory, fmt.Errorf("The not all required parameters are presented")
 	}
 	payload := map[string]string{}
-	payload["type"] = side
-	payload["status"] = status
+	if side != "" {
+		payload["type"] = side
+	}
+	if status != "" {
+		payload["status"] = status
+	}
 	if limit == 0 {
 		payload["limit"] = fmt.Sprintf("%v", 1000)
 	} else {
